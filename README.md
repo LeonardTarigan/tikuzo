@@ -20,7 +20,7 @@
     2. git commit -m "pesan commit"
     3. git push
    
-### Requirements to connect to a database:
+### Requirements to connect to a database: (DOWNLOAD JDBC / JTDS DRIVER AND SET THE CLASSPATH TO THESE DRIVER)
     1. https://learn.microsoft.com/en-us/sql/sql-server/install/configure-the-windows-firewall-to-allow-sql-server-access?view=sql-server-ver15
     2. https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access?view=sql-server-ver15
     3. Buka Sql Server Configuration Manager, pastikan SQL Server Browser aktif dan klik SQL Server Network Configuration
