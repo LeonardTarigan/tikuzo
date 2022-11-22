@@ -10,8 +10,17 @@ public class AdminPanel extends JFrame {
     private JPanel adminPanel;
     private JTabbedPane tabbedPane1;
     private JButton backButton;
-    private JButton moviesButton;
-    private JButton scheduleButton;
+    private JButton filmButton;
+    private JButton jadwalFilmButton;
+    private JButton tiketButton;
+    private JButton studioButton;
+    private JButton jadwalStudioButton;
+    private JButton kursiStudioButton;
+    private JButton customerButton;
+    private JButton pesananButton;
+    private JButton pembayaranButton;
+    private JButton bioskopButton;
+    private JButton kotaProvinsiButton;
 
     public static void main(String[] args) {
         AdminPanel adm = new AdminPanel();
