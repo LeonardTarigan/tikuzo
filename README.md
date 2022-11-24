@@ -28,3 +28,5 @@
     5. Enable protokol TCP/IP. (optional : nyalakan seluruh protokol).
     6. Buat Login baru dengan Microsoft SQL Server Management Studio dengan https://www.ibm.com/docs/en/capmp/8.1.4?topic=monitoring-creating-user-granting-permissions
     (Optional : Buat User-Defined Server Role dan set ke para login baru).
+
+###Tutorial : https://docs.oracle.com/javase/tutorial/jdbc/basics/connecting.html
