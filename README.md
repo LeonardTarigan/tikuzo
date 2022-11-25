@@ -31,4 +31,4 @@
 
 ###Tutorial : https://docs.oracle.com/javase/tutorial/jdbc/basics/connecting.html
 
-###Reporting : https://sourceforge.net/projects/jasperreports/files/latest/download
+###Reporting : https://community.jaspersoft.com/project/jaspersoft-studio
