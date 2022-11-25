@@ -30,3 +30,5 @@
     (Optional : Buat User-Defined Server Role dan set ke para login baru).
 
 ###Tutorial : https://docs.oracle.com/javase/tutorial/jdbc/basics/connecting.html
+
+###Reporting : https://sourceforge.net/projects/jasperreports/files/latest/download
