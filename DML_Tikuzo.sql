@@ -84,7 +84,7 @@ INSERT INTO tiket(tiket_ID, harga, jadwal_ID, pesanan_ID) VALUES
 	('VH1328172', 40000, 'OPQ123123', 'ORD00000004');
 
 INSERT INTO pembayaran(pembayaran_ID, status, metode, pesanan_ID) VALUES
-	('CST0000001', 1, 'Bank BCA', 'ORD00000001'),
-	('CST0000002', 1, 'Dana', 'ORD00000002'),
+	('CST0000001', 0, 'Bank BCA', 'ORD00000001'),
+	('CST0000002', 0, 'Dana', 'ORD00000002'),
 	('CST0000003', 0, 'OVO', 'ORD00000003'),
 	('CST0000004', 0, 'Bank BNI', 'ORD00000004');

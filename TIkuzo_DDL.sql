@@ -19,11 +19,13 @@ CREATE TABLE pesanan(
 );
 
 CREATE TABLE pembayaran(
-	pembayaran_ID VARCHAR(12) PRIMARY KEY,
-	status bit NOT NULL,
+	pembayaran_ID VARCHAR(12) NOT NULL,
+	status BIT NOT NULL,
+	waktu_pembayaran TIMESTAMP,
 	metode VARCHAR(10),
 	pesanan_ID VARCHAR(12) NOT NULL,
-	CONSTRAINT FK_pembayaran FOREIGN KEY (pesanan_ID) REFERENCES pesanan(pesanan_ID) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_pembayaran FOREIGN KEY (pesanan_ID) REFERENCES pesanan(pesanan_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT PK_pembayaran PRIMARY KEY (pembayaran_ID, status)
 );
 
 CREATE TABLE jadwal(
@@ -34,7 +36,7 @@ CREATE TABLE jadwal(
 
 CREATE TABLE tiket(
 	tiket_ID VARCHAR(12) PRIMARY KEY,
-	harga INT NOT NULL, 
+	harga INT NOT NULL,
 	jadwal_ID VARCHAR(12) NOT NULL,
 	pesanan_ID VARCHAR(12) NOT NULL,
 	CONSTRAINT FK_tiket1 FOREIGN KEY (jadwal_ID) REFERENCES jadwal(jadwal_ID) ON DELETE CASCADE ON UPDATE CASCADE,
