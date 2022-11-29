@@ -156,6 +156,22 @@
                   <text value="Studio Schedule"/>
                 </properties>
               </component>
+              <component id="4e6f6" class="javax.swing.JButton" binding="movieScheduleButton" default-binding="true">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Movie Schedule"/>
+                </properties>
+              </component>
+              <component id="26c34" class="javax.swing.JButton" binding="ticketButton" default-binding="true">
+                <constraints>
+                  <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Ticket"/>
+                </properties>
+              </component>
             </children>
           </grid>
         </children>

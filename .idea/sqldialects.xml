@@ -9,6 +9,7 @@
     <file url="file://$PROJECT_DIR$/src/Login.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/Main.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/MovieCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/MovieScheduleCRUD.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/OrderCRUD.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/PaymentCRUD.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/ProvinceCRUD.java" dialect="GenericSQL" />
@@ -17,5 +18,6 @@
     <file url="file://$PROJECT_DIR$/src/SeatCRUD.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/StudioCRUD.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/StudioScheduleCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/TicketCRUD.java" dialect="GenericSQL" />
   </component>
 </project>

@@ -15,6 +15,8 @@ public class AdminPanel extends JFrame {
     private JButton seatButton;
     private JButton scheduleButton;
     private JButton studioScheduleButton;
+    private JButton movieScheduleButton;
+    private JButton ticketButton;
 
     public static void main(String[] args) {
         AdminPanel adm = new AdminPanel();
@@ -114,6 +116,22 @@ public class AdminPanel extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new StudioScheduleCRUD();
+                setVisible(false);
+            }
+        });
+
+        movieScheduleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MovieScheduleCRUD();
+                setVisible(false);
+            }
+        });
+
+        ticketButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TicketCRUD();
                 setVisible(false);
             }
         });

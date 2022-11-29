@@ -6,22 +6,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 
-public class PaymentCRUD extends JFrame {
+public class TicketCRUD extends JFrame {
     private JPanel customerPanel;
-    private JTable paymentTable;
-    private JTextField paymentIdField;
-    private JTextField statusField;
-    private JTextField methodField;
-    private JTextField orderIdField;
+    private JTable ticketTable;
+    private JTextField ticketIdField;
+    private JTextField priceField;
+    private JTextField scheduleIdField;
     private JButton backButton;
     private JComboBox actionComboBox;
     private JButton createButton;
     private JButton updateButton;
     private JButton deleteButton;
+    private JButton resetButton;
     private JButton searchButton;
     private JTextField searchInput;
-    private JButton resetButton;
-    private JTextField timeField;
+    private JTextField orderIdField;
 
     public static void main(String[] args) {
 
@@ -32,20 +31,19 @@ public class PaymentCRUD extends JFrame {
     void populateTable() {
         try {
             Statement st = con.createStatement();
-            String query = "SELECT * FROM pembayaran";
+            String query = "SELECT * FROM tiket";
             ResultSet res = st.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) paymentTable.getModel();
-            String[] colNames = {"Payment ID", "Status", "Time", "Method", "Order ID"};
+            DefaultTableModel model = (DefaultTableModel) ticketTable.getModel();
+            String[] colNames = {"Ticket ID", "Price", "Schedule ID", "Order ID"};
             model.setColumnIdentifiers(colNames);
 
             while (res.next()) {
-                String payId = res.getString("pembayaran_ID");
-                String status = res.getString("status");
-                String time = res.getString("waktu_pembayaran") == null ? "NULL" : res.getString("waktu_pembayaran");
-                String method = res.getString("metode");
+                String ticketId = res.getString("tiket_ID");
+                String price = res.getString("harga");
+                String scheduleId = res.getString("jadwal_ID");
                 String orderId = res.getString("pesanan_ID");
-                String[] row = {payId, status, time, method, orderId };
+                String[] row = {ticketId, price, scheduleId, orderId};
                 model.addRow(row);
             }
 
@@ -54,7 +52,7 @@ public class PaymentCRUD extends JFrame {
         }
     }
 
-    public PaymentCRUD() {
+    public TicketCRUD() {
         //get db connection
         DBConnection dbCon = new DBConnection();
         con = dbCon.getCon();
@@ -70,54 +68,46 @@ public class PaymentCRUD extends JFrame {
         updateButton.setEnabled(false);
 
         //pupulate table
-       populateTable();
+        populateTable();
 
-
-       paymentTable.addMouseListener(new MouseAdapter() {
+        ticketTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                int row = paymentTable.getSelectedRow();
-                DefaultTableModel model = (DefaultTableModel) paymentTable.getModel();
+                int row = ticketTable.getSelectedRow();
+                DefaultTableModel model = (DefaultTableModel) ticketTable.getModel();
 
-                paymentIdField.setText(model.getValueAt(row, 0).toString());
-                statusField.setText(model.getValueAt(row, 1).toString());
-                timeField.setText(model.getValueAt(row, 2).toString());
-                methodField.setText(model.getValueAt(row, 3).toString());
-                orderIdField.setText(model.getValueAt(row, 4).toString());
+                ticketIdField.setText(model.getValueAt(row, 0).toString());
+                priceField.setText(model.getValueAt(row, 1).toString());
+                scheduleIdField.setText(model.getValueAt(row, 2).toString());
+                orderIdField.setText(model.getValueAt(row, 3).toString());
             }
-       });
+        });
 
 
         actionComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(actionComboBox.getSelectedItem().equals("Create")) {
-                    paymentIdField.setEditable(false);
-                    statusField.setEditable(true);
-                    timeField.setEditable(true);
-                    methodField.setEditable(true);
-                    orderIdField.setEditable(true);
+                    priceField.setEditable(true);
+                    scheduleIdField.setEditable(true);
+                    orderIdField.setEditable(false);
 
                     createButton.setEnabled(true);
                     deleteButton.setEnabled(false);
                     updateButton.setEnabled(false);
                 } else if (actionComboBox.getSelectedItem().equals("Update")) {
-                    paymentIdField.setEditable(false);
-                    statusField.setEditable(true);
-                    timeField.setEditable(true);
-                    methodField.setEditable(true);
+                    priceField.setEditable(true);
+                    scheduleIdField.setEditable(true);
                     orderIdField.setEditable(true);
 
                     updateButton.setEnabled(true);
                     createButton.setEnabled(false);
                     deleteButton.setEnabled(false);
                 } else if (actionComboBox.getSelectedItem().equals("Delete")) {
-                    paymentIdField.setEditable(false);
-                    statusField.setEditable(false);
-                    timeField.setEditable(true);
-                    methodField.setEditable(false);
+                    priceField.setEditable(false);
+                    scheduleIdField.setEditable(false);
                     orderIdField.setEditable(false);
 
                     deleteButton.setEnabled(true);
@@ -134,30 +124,27 @@ public class PaymentCRUD extends JFrame {
                     PreparedStatement ps;
 
                     if (searchInput.getText().equals("")) {
-                        ps = con.prepareStatement("SELECT * FROM pembayaran ");
+                        ps = con.prepareStatement("SELECT * FROM tiket");
                     } else {
-                        ps = con.prepareStatement("SELECT * FROM pembayaran WHERE status LIKE CONCAT('%', ?, '%') OR pesanan_ID LIKE CONCAT('%', ?, '%') OR metode LIKE CONCAT('%', ?, '%') OR pembayaran_ID LIKE CONCAT('%', ?, '%')");
+                        ps = con.prepareStatement("SELECT * FROM tiket WHERE harga LIKE CONCAT('%', ?, '%') OR jadwal_ID LIKE CONCAT('%', ?, '%')");
                         ps.setString(1, searchInput.getText());
                         ps.setString(2, searchInput.getText());
-                        ps.setString(3, searchInput.getText());
-                        ps.setString(4, searchInput.getText());
                     }
 
                     ResultSet res = ps.executeQuery();
 
-                    DefaultTableModel model = (DefaultTableModel) paymentTable.getModel();
+                    DefaultTableModel model = (DefaultTableModel) ticketTable.getModel();
 
                     for (int i = model.getRowCount() - 1; i >= 0; i--) {
                         model.removeRow(i);
                     }
 
                     while (res.next()) {
-                        String payId = res.getString("pembayaran_ID");
-                        String status = res.getString("status");
-                        String time = res.getString("waktu_pembayaran");
-                        String method = res.getString("metode");
+                        String ticketId = res.getString("tiket_ID");
+                        String price = res.getString("harga");
+                        String scheduleId = res.getString("jadwal_ID");
                         String orderId = res.getString("pesanan_ID");
-                        String[] row = {payId, status, time, method, orderId };
+                        String[] row = {ticketId, price, scheduleId, orderId};
                         model.addRow(row);
                     }
 
@@ -168,21 +155,30 @@ public class PaymentCRUD extends JFrame {
         });
 
 
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AdminPanel();
+                setVisible(false);
+            }
+        });
+
+
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int response = JOptionPane.showConfirmDialog(null, ("Are you sure want to delete " + paymentIdField.getText() + "?"), "Delete Record", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int response = JOptionPane.showConfirmDialog(null, ("Are you sure want to delete " + ticketIdField.getText() + "?"), "Delete Record", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 if (response == JOptionPane.YES_OPTION) {
                     try {
-                        PreparedStatement ps = con.prepareStatement("DELETE FROM pembayaran WHERE pembayaran_ID = ?");
-                        ps.setString(1, paymentIdField.getText());
+                        PreparedStatement ps = con.prepareStatement("DELETE FROM tiket WHERE tiket_ID = ?");
+                        ps.setString(1, ticketIdField.getText());
 
                         ps.executeUpdate();
 
                         JOptionPane.showMessageDialog(null, "Deleted!");
 
-                        DefaultTableModel model = (DefaultTableModel) paymentTable.getModel();
+                        DefaultTableModel model = (DefaultTableModel) ticketTable.getModel();
 
                         for (int i = model.getRowCount() - 1; i >= 0; i--) {
                             model.removeRow(i);
@@ -200,15 +196,15 @@ public class PaymentCRUD extends JFrame {
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int response = JOptionPane.showConfirmDialog(null, ("Are you sure want to insert new payment?"), "Create Record", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int response = JOptionPane.showConfirmDialog(null, ("Are you sure want to insert new ticket?"), "Create Record", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 if (response == JOptionPane.YES_OPTION) {
                     try {
-                        PreparedStatement ps = con.prepareStatement("INSERT INTO pembayaran(pembayaran_ID, status, metode, pesanan_ID) VALUES (?, ?, ?, ?)");
+                        PreparedStatement ps = con.prepareStatement("INSERT INTO tiket(tiket_ID, harga, jadwal_ID, pesanan_ID) VALUES (?, ?, ?, NULL)");
 
                         String randId = new Utils().generateRandom();
 
-                        PreparedStatement idCheck = con.prepareStatement("SELECT pembayaran_ID FROM pembayaran WHERE pembayaran_ID=?");
+                        PreparedStatement idCheck = con.prepareStatement("SELECT tiket_ID FROM tiket WHERE tiket_ID=?");
                         idCheck.setString(1, randId);
                         ResultSet idRes = idCheck.executeQuery();
 
@@ -223,15 +219,14 @@ public class PaymentCRUD extends JFrame {
                         }
 
                         ps.setString(1, randId);
-                        ps.setString(2, statusField.getText());
-                        ps.setString(3, methodField.getText());
-                        ps.setString(4, orderIdField.getText());
+                        ps.setString(2, priceField.getText());
+                        ps.setString(3, scheduleIdField.getText());
 
                         ps.executeUpdate();
 
                         JOptionPane.showMessageDialog(null, "Inserted!");
 
-                        DefaultTableModel model = (DefaultTableModel) paymentTable.getModel();
+                        DefaultTableModel model = (DefaultTableModel) ticketTable.getModel();
 
                         for (int i = model.getRowCount() - 1; i >= 0; i--) {
                             model.removeRow(i);
@@ -239,10 +234,9 @@ public class PaymentCRUD extends JFrame {
 
                         populateTable();
 
-                        paymentIdField.setText("");
-                        statusField.setText("");
-                        timeField.setText("");
-                        methodField.setText("");
+                        ticketIdField.setText("");
+                        priceField.setText("");
+                        scheduleIdField.setText("");
                         orderIdField.setText("");
                     } catch (SQLException err) {
                         JOptionPane.showMessageDialog(null, String.valueOf(err));
@@ -255,22 +249,22 @@ public class PaymentCRUD extends JFrame {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int response = JOptionPane.showConfirmDialog(null, ("Are you sure want to update " + paymentIdField.getText() + "?"), "Update Record", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int response = JOptionPane.showConfirmDialog(null, ("Are you sure want to update " + ticketIdField.getText() + "?"), "Update Record", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 if (response == JOptionPane.YES_OPTION) {
                     try {
-                        PreparedStatement ps = con.prepareStatement("UPDATE pembayaran SET status=?, waktu_pembayaran=CURRENT_TIMESTAMP, metode=?, pesanan_ID=? WHERE pembayaran_ID=?");
+                        PreparedStatement ps = con.prepareStatement("UPDATE tiket SET harga=?, jadwal_ID=?, pesanan_ID=? WHERE studio_ID=?");
 
-                        ps.setString(1, statusField.getText());
-                        ps.setString(2, methodField.getText());
+                        ps.setString(1, priceField.getText());
+                        ps.setString(2, scheduleIdField.getText());
                         ps.setString(3, orderIdField.getText());
-                        ps.setString(4, paymentIdField.getText());
+                        ps.setString(4, ticketIdField.getText());
 
                         ps.executeUpdate();
 
                         JOptionPane.showMessageDialog(null, "Updated!");
 
-                        DefaultTableModel model = (DefaultTableModel) paymentTable.getModel();
+                        DefaultTableModel model = (DefaultTableModel) ticketTable.getModel();
 
                         for (int i = model.getRowCount() - 1; i >= 0; i--) {
                             model.removeRow(i);
@@ -278,10 +272,9 @@ public class PaymentCRUD extends JFrame {
 
                         populateTable();
 
-                        paymentIdField.setText("");
-                        statusField.setText("");
-                        timeField.setText("");
-                        methodField.setText("");
+                        ticketIdField.setText("");
+                        priceField.setText("");
+                        scheduleIdField.setText("");
                         orderIdField.setText("");
                     } catch (SQLException err) {
                         JOptionPane.showMessageDialog(null, err);
@@ -291,22 +284,12 @@ public class PaymentCRUD extends JFrame {
         });
 
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AdminPanel();
-                setVisible(false);
-            }
-        });
-
-
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                paymentIdField.setText("");
-                statusField.setText("");
-                timeField.setText("");
-                methodField.setText("");
+                ticketIdField.setText("");
+                priceField.setText("");
+                scheduleIdField.setText("");
                 orderIdField.setText("");
             }
         });
