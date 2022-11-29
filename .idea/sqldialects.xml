@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/TIkuzo_DDL.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/src/AdminPanel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/CinemaCRUD.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/ClientPanel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/CustomerCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/Login.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/Main.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/MovieCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/OrderCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/PaymentCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/ProvinceCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/Register.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/ScheduleCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/SeatCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/StudioCRUD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/StudioScheduleCRUD.java" dialect="GenericSQL" />
   </component>
 </project>

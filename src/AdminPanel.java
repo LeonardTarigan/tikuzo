@@ -1,95 +1,121 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
-import java.util.Vector;
 
 public class AdminPanel extends JFrame {
     private JPanel adminPanel;
-    private JTabbedPane tabbedPane1;
     private JButton backButton;
-    private JButton filmButton;
-    private JButton jadwalFilmButton;
-    private JButton tiketButton;
-    private JButton studioButton;
-    private JButton jadwalStudioButton;
-    private JButton kursiStudioButton;
     private JButton customerButton;
-    private JButton pesananButton;
-    private JButton pembayaranButton;
-    private JButton bioskopButton;
-    private JButton kotaProvinsiButton;
+    private JButton movieButton;
+    private JButton paymentButton;
+    private JButton orderButton;
+    private JButton provinceButton;
+    private JButton cinemaButton;
+    private JButton studioButton;
+    private JButton seatButton;
+    private JButton scheduleButton;
+    private JButton studioScheduleButton;
 
     public static void main(String[] args) {
         AdminPanel adm = new AdminPanel();
-
-        String url = "jdbc:sqlserver://LEONARDS-ACER\\SQLEXPRESS;database=University;integratedSecurity=true;encrypt=true;trustServerCertificate=true;";
-
-        try {
-            Connection con = DriverManager.getConnection(url);
-            Statement st = con.createStatement();
-            String q = "SELECT TOP 5 * FROM instructor";
-            ResultSet res = st.executeQuery(q);
-
-            while(res.next()) {
-                System.out.println(res.getInt(1) + " " + res.getString(2));
-            }
-
-            resToTableModel(res);
-
-
-        }catch (SQLException e) {
-            System.out.println(e);
-            e.printStackTrace();
-        }
     }
 
     public AdminPanel() {
         setContentPane(adminPanel);
         setTitle("Tikuzo");
-        setSize(450, 300);
+        pack();
+        setLocationRelativeTo(null);
         setVisible(true);
 
-        //back to login
+        //back to log in
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Login().setVisible(true);
+                new Login();
                 setVisible(false);
             }
         });
 
 
-    }
-
-    public static TableModel resToTableModel(ResultSet rs) {
-        try {
-            ResultSetMetaData metaData = rs.getMetaData();
-            int numOfColumns = metaData.getColumnCount();
-            Vector columnNames = new Vector();
-
-            for (int column = 0; column < numOfColumns;  column++) {
-                columnNames.addElement(metaData.getColumnLabel(column + 1));
+        customerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CustomerCRUD();
+                setVisible(false);
             }
+        });
 
-            Vector rows = new Vector();
 
-            while (rs.next()) {
-                Vector newRow = new Vector();
-
-                for (int i = 1; i <= numOfColumns; i++) {
-                    newRow.addElement(rs.getObject(i));
-                }
-
-                rows.addElement(newRow);
+        movieButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MovieCRUD();
+                setVisible(false);
             }
+        });
 
-            return new DefaultTableModel(rows, columnNames);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        paymentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new PaymentCRUD();
+                setVisible(false);
+            }
+        });
+
+        orderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new OrderCRUD();
+                setVisible(false);
+            }
+        });
+
+        provinceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ProvinceCRUD();
+                setVisible(false);
+            }
+        });
+
+        cinemaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CinemaCRUD();
+                setVisible(false);
+            }
+        });
+
+        studioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new StudioCRUD();
+                setVisible(false);
+            }
+        });
+
+        seatButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SeatCRUD();
+                setVisible(false);
+            }
+        });
+
+        scheduleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ScheduleCRUD();
+                setVisible(false);
+            }
+        });
+
+        studioScheduleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new StudioScheduleCRUD();
+                setVisible(false);
+            }
+        });
     }
 }
