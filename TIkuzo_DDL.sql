@@ -21,7 +21,7 @@ CREATE TABLE pesanan(
 CREATE TABLE pembayaran(
 	pembayaran_ID VARCHAR(12) NOT NULL,
 	status BIT NOT NULL,
-	waktu_pembayaran TIMESTAMP,
+	waktu_pembayaran SMALLDATETIME DEFAULT NULL,
 	metode VARCHAR(10),
 	pesanan_ID VARCHAR(12) NOT NULL,
 	CONSTRAINT FK_pembayaran FOREIGN KEY (pesanan_ID) REFERENCES pesanan(pesanan_ID) ON DELETE CASCADE ON UPDATE CASCADE,
