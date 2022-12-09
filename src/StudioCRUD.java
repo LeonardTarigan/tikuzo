@@ -31,7 +31,7 @@ public class StudioCRUD extends JFrame {
     void populateTable() {
         try {
             Statement st = con.createStatement();
-            String query = "SELECT * FROM studio ORDER BY tipe";
+            String query = "SELECT * FROM studio ORDER BY tipe, nama";
             ResultSet res = st.executeQuery(query);
 
             DefaultTableModel model = (DefaultTableModel) studioTable.getModel();
@@ -120,9 +120,9 @@ public class StudioCRUD extends JFrame {
                     PreparedStatement ps;
 
                     if (searchInput.getText().equals("")) {
-                        ps = con.prepareStatement("SELECT * FROM studio ORDER BY tipe");
+                        ps = con.prepareStatement("SELECT * FROM studio ORDER BY tipe, nama");
                     } else {
-                        ps = con.prepareStatement("SELECT * FROM studio WHERE nama LIKE CONCAT('%', ?, '%') OR tipe LIKE CONCAT('%', ?, '%') ORDER BY tipe");
+                        ps = con.prepareStatement("SELECT * FROM studio WHERE nama LIKE CONCAT('%', ?, '%') OR tipe LIKE CONCAT('%', ?, '%') ORDER BY tipe, nama");
                         ps.setString(1, searchInput.getText());
                         ps.setString(2, searchInput.getText());
                     }

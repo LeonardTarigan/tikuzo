@@ -46,7 +46,7 @@ public class ClientPanel extends JFrame{
         //populate combobox
         try {
             Statement st = con.createStatement();
-            String query = "SELECT kota FROM bioskop ORDER BY kota";
+            String query = "SELECT DISTINCT kota FROM bioskop ORDER BY kota";
             ResultSet res = st.executeQuery(query);
 
             while(res.next()) {

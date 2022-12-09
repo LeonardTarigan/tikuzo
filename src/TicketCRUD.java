@@ -42,7 +42,7 @@ public class TicketCRUD extends JFrame {
                 String ticketId = res.getString("tiket_ID");
                 String price = res.getString("harga");
                 String scheduleId = res.getString("jadwal_ID");
-                String orderId = res.getString("pesanan_ID");
+                String orderId = res.getString("pesanan_ID") == null ? "NULL" : res.getString("pesanan_ID");
                 String[] row = {ticketId, price, scheduleId, orderId};
                 model.addRow(row);
             }
@@ -143,9 +143,8 @@ public class TicketCRUD extends JFrame {
                         String ticketId = res.getString("tiket_ID");
                         String price = res.getString("harga");
                         String scheduleId = res.getString("jadwal_ID");
-                        String orderId = res.getString("pesanan_ID");
+                        String orderId = res.getString("pesanan_ID") == null ? "NULL" : res.getString("pesanan_ID");
                         String[] row = {ticketId, price, scheduleId, orderId};
-                        model.addRow(row);
                     }
 
                 } catch (SQLException err) {
@@ -253,7 +252,7 @@ public class TicketCRUD extends JFrame {
 
                 if (response == JOptionPane.YES_OPTION) {
                     try {
-                        PreparedStatement ps = con.prepareStatement("UPDATE tiket SET harga=?, jadwal_ID=?, pesanan_ID=? WHERE studio_ID=?");
+                        PreparedStatement ps = con.prepareStatement("UPDATE tiket SET harga=?, jadwal_ID=?, pesanan_ID=? WHERE tiket_ID=?");
 
                         ps.setString(1, priceField.getText());
                         ps.setString(2, scheduleIdField.getText());

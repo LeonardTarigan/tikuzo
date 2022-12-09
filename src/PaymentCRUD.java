@@ -154,7 +154,7 @@ public class PaymentCRUD extends JFrame {
                     while (res.next()) {
                         String payId = res.getString("pembayaran_ID");
                         String status = res.getString("status");
-                        String time = res.getString("waktu_pembayaran");
+                        String time = res.getString("waktu_pembayaran") == null ? "NULL" : res.getString("waktu_pembayaran");
                         String method = res.getString("metode");
                         String orderId = res.getString("pesanan_ID");
                         String[] row = {payId, status, time, method, orderId };

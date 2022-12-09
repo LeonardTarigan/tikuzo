@@ -31,7 +31,7 @@ public class ScheduleCRUD extends JFrame {
     void populateTable() {
         try {
             Statement st = con.createStatement();
-            String query = "SELECT jadwal_ID, tanggal, CONVERT(VARCHAR(5), jam_mulai, 108) jam_mulai FROM jadwal";
+            String query = "SELECT jadwal_ID, tanggal, CONVERT(VARCHAR(5), jam_mulai, 108) jam_mulai FROM jadwal ORDER BY tanggal, jam_mulai";
             ResultSet res = st.executeQuery(query);
 
             DefaultTableModel model = (DefaultTableModel) scheduleTable.getModel();
@@ -119,9 +119,9 @@ public class ScheduleCRUD extends JFrame {
                     PreparedStatement ps;
 
                     if (searchInput.getText().equals("")) {
-                        ps = con.prepareStatement("SELECT jadwal_ID, tanggal, CONVERT(VARCHAR(5), jam_mulai, 108) jam_mulai FROM jadwal");
+                        ps = con.prepareStatement("SELECT jadwal_ID, tanggal, CONVERT(VARCHAR(5), jam_mulai, 108) jam_mulai FROM jadwal ORDER BY tanggal, jam_mulai");
                     } else {
-                        ps = con.prepareStatement("SELECT jadwal_ID, tanggal, CONVERT(VARCHAR(5), jam_mulai, 108) jam_mulai FROM jadwal WHERE tanggal LIKE CONCAT('%', ?, '%') OR jadwal_ID LIKE CONCAT('%', ?, '%') ");
+                        ps = con.prepareStatement("SELECT jadwal_ID, tanggal, CONVERT(VARCHAR(5), jam_mulai, 108) jam_mulai FROM jadwal WHERE tanggal LIKE CONCAT('%', ?, '%') OR jadwal_ID LIKE CONCAT('%', ?, '%') ORDER BY tanggal, jam_mulai ");
                         ps.setString(1, searchInput.getText());
                         ps.setString(2, searchInput.getText());
                     }

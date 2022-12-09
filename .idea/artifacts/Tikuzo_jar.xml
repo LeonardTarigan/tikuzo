@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Tikuzo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tikuzo_jar</output-path>
+    <root id="archive" name="Tikuzo.jar">
+      <element id="module-output" name="Tikuzo" />
+      <element id="extracted-dir" path="D:/sqljdbc_11.2.0.0_enu/sqljdbc_11.2/enu/mssql-jdbc-11.2.0.jre17.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -200,23 +200,7 @@ public class SeatCRUD extends JFrame {
                     try {
                         PreparedStatement ps = con.prepareStatement("INSERT INTO kursi_studio(studio_ID, no_kursi, status) VALUES (?, ?, ?)");
 
-                        String randId = new Utils().generateRandom();
-
-                        PreparedStatement idCheck = con.prepareStatement("SELECT studio_ID FROM studio WHERE studio_ID=?");
-                        idCheck.setString(1, randId);
-                        ResultSet idRes = idCheck.executeQuery();
-
-                        while (true) {
-                            if (idRes == null) {
-                                randId = new Utils().generateRandom();
-                                idCheck.setString(1, randId);
-                                idRes = idCheck.executeQuery();
-                            } else {
-                                break;
-                            }
-                        }
-
-                        ps.setString(1, randId);
+                        ps.setString(1, studioIdField.getText());
                         ps.setString(2, seatField.getText());
                         ps.setString(3, statusField.getText());
 
